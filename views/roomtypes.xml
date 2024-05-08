@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- roomtypes.xml -->
+<odoo>
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="view_hotel_roomtypes_list">
+    <field name="name">Roomtypes Master List</field>
+    <field name="model">hotel.roomtypes</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="name"/>
+        <field name="description"/>      
+        <field name="room_ids"/>
+      </tree>
+    </field>
+  </record>
+
+  <!-- explicit form view definition -->
+  <record model="ir.ui.view" id="view_hotel_roomtypes_form">
+    <field name="name">Hotel Roomtype</field>
+    <field name="model">hotel.roomtypes</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+            <group>
+               <field name="name"/>
+            </group>
+            <group>
+               <field name="description"/>      
+            </group>
+    
+          <notebook>
+          <!-- First page -->
+            <page string="Daily Charges" name="page_daily_charges">
+
+              <!-- Add fields or other elements specific to the first page here -->
+              <!-- For example, you can add fields like this: -->
+              <!--<field name="field_name"/>-->
+              <field name="dailycharges_ids">
+                <tree editable="bottom">
+                 <field name="charge_id"/>  
+                  <field name="amount"/>  
+                </tree>
+              </field>
+            </page>
+
+            <!-- Second page -->
+            <page string="Images" name="second_page">
+              <!-- Add fields or other elements specific to the second page here -->
+              <!-- For example, you can add fields like this: -->
+              <!--<field name="field_name"/>-->
+                            
+                <form>
+                  <group>
+                    <field name="imageroom" widget="image"/>  
+                  </group>  
+                  <group>  
+                    <field name="imagebathroom" widget="image"/>  
+                  </group>                     
+                </form>
+              
+            </page>
+            <page string="Rooms" name="third_page">
+             <field name="room_ids" readonly="1">
+                <tree >
+                 <field name="name"/>  
+                 <field name="description"/>                   
+                </tree>
+              </field>
+            </page>
+            </notebook>
+          </sheet>    
+      </form>
+    </field>
+  </record>
+
+
+  <!-- actions opening views on models -->
+  <record model="ir.actions.act_window" id="action_hotel_roomtypes">
+    <field name="name">Hotel Room Types</field>
+    <field name="res_model">hotel.roomtypes</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+ <!-- menu item for charges cruds -->
+  <menuitem 
+    name="Room Types" id="menu_hotel_roomtypes" 
+    parent="menu_hotel_masterlists"
+    action="action_hotel_roomtypes"
+    sequence="3"/>
+ </odoo>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- roomtypes.xml -->
+<odoo>
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="view_hotel_documents_list">
+    <field name="name">Documents Master List</field>
+    <field name="model">hotel.documents</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="name"/>
+        <field name="description"/>      
+      </tree>
+    </field>
+  </record>
+
+  <!-- explicit form view definition -->
+  <record model="ir.ui.view" id="view_hotel_documents_form">
+    <field name="name">Hotel Document</field>
+    <field name="model">hotel.documents</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+            <group>
+               <field name="name" style="font-weight: bold;"/>
+            </group>
+            <group>
+               <field name="description" style="font-weight: bold;"/>      
+            </group>
+            
+          </sheet>    
+      </form>
+    </field>
+  </record>
+
+
+  <!-- actions opening views on models -->
+  <record model="ir.actions.act_window" id="action_hotel_documents">
+    <field name="name">Hotel Documents</field>
+    <field name="res_model">hotel.documents</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+ <!-- menu item for charges cruds -->
+  <menuitem 
+    name="Hotel Documents" id="menu_hotel_documents" 
+    parent="menu_hotel_masterlists"
+    action="action_hotel_documents"
+    sequence="4"/>
+ </odoo>
